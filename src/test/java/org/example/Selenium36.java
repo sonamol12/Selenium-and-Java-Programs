@@ -1,18 +1,15 @@
-package org.example;
-
 import io.qameta.allure.Description;
-import org.openqa.selenium.By;
-import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class Selenium2629 {
+public class Selenium36 {
 
     // Atomic Test Cases
     // TC who don't have any dep.
@@ -29,24 +26,21 @@ public class Selenium2629 {
     }
 
 
-
-
-
     @Test(groups = "QA")
     @Description("Test Case Description")
     public void testPositive() throws InterruptedException {
-        String URL = "https://www.flipkart.com/";
+        String URL = "https://www.makemytrip.com/";
         driver.get(URL);
-        driver.manage().window().maximize();
 
-        driver.findElement(By.name("q")).sendKeys("macmini");
 
-        // https://www.flipkart.com/
-        // //*[local-name()='svg']/*[local-name()='path']
-        // (//*[local-name()='svg'])[1]
-        // (//*[name()='svg'])[1]
-        List<WebElement> svgElements = driver.findElements(By.xpath("//*[local-name()='svg']"));
-        svgElements.get(0).click();
+        Actions actions = new Actions(driver);
+        Thread.sleep(2000);
+        actions.sendKeys(Keys.PAGE_DOWN).sendKeys(Keys.PAGE_DOWN).build().perform();
+        System.out.println("Scroll Down");
+
+
+
+
 
 
 

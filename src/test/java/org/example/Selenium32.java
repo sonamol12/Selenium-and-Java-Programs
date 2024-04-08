@@ -1,19 +1,16 @@
 package org.example;
-
 import io.qameta.allure.Description;
-import org.openqa.selenium.By;
-import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class Selenium2629 {
-
+public class Selenium32 {
     // Atomic Test Cases
     // TC who don't have any dep.
     // They serve single purpose 0
@@ -35,18 +32,33 @@ public class Selenium2629 {
     @Test(groups = "QA")
     @Description("Test Case Description")
     public void testPositive() throws InterruptedException {
-        String URL = "https://www.flipkart.com/";
+        String URL = "https://awesomeqa.com/practice.html";
         driver.get(URL);
         driver.manage().window().maximize();
 
-        driver.findElement(By.name("q")).sendKeys("macmini");
+        // THETESTINGACADEMY
+        // Shift Keydown -> thtestingacademy + Shift KeyUp
 
-        // https://www.flipkart.com/
-        // //*[local-name()='svg']/*[local-name()='path']
-        // (//*[local-name()='svg'])[1]
-        // (//*[name()='svg'])[1]
-        List<WebElement> svgElements = driver.findElements(By.xpath("//*[local-name()='svg']"));
-        svgElements.get(0).click();
+        WebElement firstName = driver.findElement(By.name("firstname"));
+
+        Actions actions = new Actions(driver);
+        actions
+                .keyDown(Keys.SHIFT)
+                .sendKeys(firstName,"thetestingacademy")
+                .keyUp(Keys.SHIFT).build().perform();
+
+        WebElement link = driver.findElement(By.xpath("//a[contains(text(),\"Click here to Download File\")]"));
+        actions.contextClick(link).build().perform();
+
+
+
+
+
+        Thread.sleep(13000);
+
+
+
+
 
 
 
@@ -83,3 +95,9 @@ public class Selenium2629 {
         driver.quit();
     }
 }
+
+
+
+
+
+

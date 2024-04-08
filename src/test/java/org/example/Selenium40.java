@@ -1,18 +1,20 @@
 package org.example;
 
 import io.qameta.allure.Description;
-import org.openqa.selenium.By;
-import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import static org.openqa.selenium.support.locators.RelativeLocator.*;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
-public class Selenium2629 {
+public class Selenium40 {
 
     // Atomic Test Cases
     // TC who don't have any dep.
@@ -20,8 +22,9 @@ public class Selenium2629 {
 
 
     EdgeDriver driver;
+
     @BeforeTest
-    public void openBrowser(){
+    public void openBrowser() {
         EdgeOptions options = new EdgeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         options.addArguments("--guest");
@@ -29,26 +32,16 @@ public class Selenium2629 {
     }
 
 
-
-
-
     @Test(groups = "QA")
     @Description("Test Case Description")
     public void testPositive() throws InterruptedException {
-        String URL = "https://www.flipkart.com/";
-        driver.get(URL);
+        driver.get("https://awesomeqa.com/practice.html");
         driver.manage().window().maximize();
-
-        driver.findElement(By.name("q")).sendKeys("macmini");
-
-        // https://www.flipkart.com/
-        // //*[local-name()='svg']/*[local-name()='path']
-        // (//*[local-name()='svg'])[1]
-        // (//*[name()='svg'])[1]
-        List<WebElement> svgElements = driver.findElements(By.xpath("//*[local-name()='svg']"));
-        svgElements.get(0).click();
+        WebElement span_element = driver.findElement(By.xpath("//span[normalize-space()='Years of Experience']"));
+        driver.findElement(with(By.id("exp-3")).toRightOf(span_element)).click();
 
 
+        Thread.sleep(5000);
 
 
 
@@ -57,29 +50,8 @@ public class Selenium2629 {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @AfterTest
-    public void closeBrowser(){
+    public void closeBrowser() {
         driver.quit();
     }
 }

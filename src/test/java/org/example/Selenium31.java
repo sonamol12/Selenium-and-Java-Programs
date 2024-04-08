@@ -1,7 +1,9 @@
 package org.example;
 
+
 import io.qameta.allure.Description;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -12,7 +14,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class Selenium2629 {
+public class Selenium31 {
+
 
     // Atomic Test Cases
     // TC who don't have any dep.
@@ -35,18 +38,30 @@ public class Selenium2629 {
     @Test(groups = "QA")
     @Description("Test Case Description")
     public void testPositive() throws InterruptedException {
-        String URL = "https://www.flipkart.com/";
+        String URL = "https://selectorshub.com/xpath-practice-page/";
         driver.get(URL);
         driver.manage().window().maximize();
 
-        driver.findElement(By.name("q")).sendKeys("macmini");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
 
-        // https://www.flipkart.com/
-        // //*[local-name()='svg']/*[local-name()='path']
-        // (//*[local-name()='svg'])[1]
-        // (//*[name()='svg'])[1]
-        List<WebElement> svgElements = driver.findElements(By.xpath("//*[local-name()='svg']"));
-        svgElements.get(0).click();
+
+        //Javascript Code -  document.querySelector("div#userName").shadowRoot.querySelector("div").shadowRoot.querySelector("input#pizza")
+
+
+        WebElement divScrollTo = driver.findElement(By.xpath("//div[@id='userName']"));
+        js.executeScript("arguments[0].scrollIntoView(true);",divScrollTo);
+
+        Thread.sleep(3000);
+
+
+        WebElement inputboxPizza = (WebElement) js.executeScript("return document.querySelector(\"div#userName\").shadowRoot.querySelector(\"div\").shadowRoot.querySelector(\"input#pizza\")");
+        inputboxPizza.sendKeys("Farmhouse");
+
+        Thread.sleep(13000);
+
+
+
+
 
 
 
@@ -83,3 +98,7 @@ public class Selenium2629 {
         driver.quit();
     }
 }
+
+
+
+

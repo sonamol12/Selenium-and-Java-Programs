@@ -1,5 +1,4 @@
 package org.example;
-
 import io.qameta.allure.Description;
 import org.openqa.selenium.By;
 import org.openqa.selenium.PageLoadStrategy;
@@ -11,13 +10,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.List;
-
-public class Selenium2629 {
-
-    // Atomic Test Cases
-    // TC who don't have any dep.
-    // They serve single purpose 0
-
+public class Selenium30 {
 
     EdgeDriver driver;
     @BeforeTest
@@ -35,19 +28,23 @@ public class Selenium2629 {
     @Test(groups = "QA")
     @Description("Test Case Description")
     public void testPositive() throws InterruptedException {
-        String URL = "https://www.flipkart.com/";
+        String URL = "https://www.amcharts.com/svg-maps/?map=india";
         driver.get(URL);
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
 
-        driver.findElement(By.name("q")).sendKeys("macmini");
 
-        // https://www.flipkart.com/
-        // //*[local-name()='svg']/*[local-name()='path']
-        // (//*[local-name()='svg'])[1]
-        // (//*[name()='svg'])[1]
-        List<WebElement> svgElements = driver.findElements(By.xpath("//*[local-name()='svg']"));
-        svgElements.get(0).click();
+        ////*[name()='svg']/*[name()='g'][7]/*[name()='g']/*[name()='g']/*[name()='path'] -> 36 States
+        // Click on THE Tripura?
+        List<WebElement> states = driver.findElements(By.xpath("//*[name()='svg']/*[name()='g'][7]/*[name()='g']/*[name()='g']/*[name()='path']"));
 
+        for (WebElement state: states){
+//            System.out.println(state.getAttribute("aria-label"));
+            if(state.getAttribute("aria-label").contains("Tripura")){
+                state.click();
+            }
+        }
+
+        //  I Agree -> Action Class
 
 
 
@@ -83,3 +80,20 @@ public class Selenium2629 {
         driver.quit();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
